@@ -31,7 +31,7 @@ public class WeatherController {
         } catch (NotFoundException nfe) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
         } catch (ApplicationException ae) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Process failed");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Process failed");
         }
         return weatherResponse;
     }
