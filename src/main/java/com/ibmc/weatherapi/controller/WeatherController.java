@@ -25,14 +25,12 @@ public class WeatherController {
         weatherResponse.setCity(city);
         weatherResponse.setState(state);
         weatherResponse.setCountry(country);
-        //  try {
+
+       
         OpenWeatherResponse openWeatherResponse = openWeatherRestClient.getWeather(city, state, country);
         weatherResponse.setCurrentTemperature(openWeatherResponse.getMain().getTemp());
-     /*   } catch (NotFoundException nfe) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
-        } catch (ApplicationException ae) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Process failed");
-        }*/
+    
+
         return weatherResponse;
     }
 }
