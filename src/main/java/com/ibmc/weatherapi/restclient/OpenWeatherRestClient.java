@@ -24,11 +24,13 @@ public class OpenWeatherRestClient {
                     state + "," + country + "&units=metric&appid=79dc2d0d64e5cd2d2a41b5ae677b7c44";
             openWeatherResponse = restTemplate.getForObject(url, OpenWeatherResponse.class);
         } catch (HttpClientErrorException e) {
-            log.error("Unable to retrieve weather city={},state={},country={}", city, state, country);
+
             if (e.getRawStatusCode() == HttpStatus.NOT_FOUND.value()) {
                 //handle 404
+                log.info("Unable to retrieve weather city={},state={},country={}", city, state, country);
                 throw new NotFoundException("City not found", e);
             }
+            log.error("Unable to retrieve weather city={},state={},country={},error={}", city, state, country, e.toString());
             throw new ApplicationException("Unable to process request", e);
         }
         return openWeatherResponse;
