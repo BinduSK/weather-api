@@ -1,36 +1,24 @@
 package com.ibmc.weatherapi.controller;
 
-import com.ibmc.weatherapi.dto.WeatherResponse;
-import com.ibmc.weatherapi.exception.ApplicationException;
-import com.ibmc.weatherapi.exception.NotFoundException;
+import com.ibmc.weatherapi.domain.Weather;
 import com.ibmc.weatherapi.restclient.OpenWeatherResponse;
 import com.ibmc.weatherapi.restclient.OpenWeatherRestClient;
+import com.ibmc.weatherapi.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class WeatherController {
     @Autowired
-    OpenWeatherRestClient openWeatherRestClient;
+    WeatherService weatherService;
 
     @GetMapping("/weather")
-    public WeatherResponse getWeather(@RequestParam(required = true) String city,
-                                      @RequestParam(required = false) String state,
-                                      @RequestParam(required = false) String country) {
-        WeatherResponse weatherResponse = new WeatherResponse();
-        weatherResponse.setCity(city);
-        weatherResponse.setState(state);
-        weatherResponse.setCountry(country);
-
-       
-        OpenWeatherResponse openWeatherResponse = openWeatherRestClient.getWeather(city, state, country);
-        weatherResponse.setCurrentTemperature(openWeatherResponse.getMain().getTemp());
-    
-
-        return weatherResponse;
+    public Weather getWeather(@RequestParam(required = true) String city,
+                              @RequestParam(required = false) String state,
+                              @RequestParam(required = false) String country) {
+        Weather weather = weatherService.getWeather(city, state, country);
+        return weather;
     }
 }

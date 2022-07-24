@@ -1,6 +1,6 @@
-package com.ibmc.weatherapi.dto;
+package com.ibmc.weatherapi.domain;
 
-public class WeatherResponse {
+public class Weather {
     String city,state,country;
 
     public String getCity() {
