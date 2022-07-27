@@ -1,7 +1,9 @@
 package com.ibmc.weatherapi.domain;
 
 public class Weather {
-    String city,state,country;
+    String city, state, country;
+    Double currentTemperature;
+    Double feelslike;
 
     public String getCity() {
         return city;
@@ -27,14 +29,19 @@ public class Weather {
         this.country = country;
     }
 
-    Double currentTemperature;
-
-
     public Double getCurrentTemperature() {
         return currentTemperature;
     }
 
     public void setCurrentTemperature(Double currentTemperature) {
         this.currentTemperature = currentTemperature;
+    }
+
+    public Double getFeelslike() {
+        return feelslike;
+    }
+
+    public void setFeelslike(Double feelslike) {
+        this.feelslike = feelslike;
     }
 }
