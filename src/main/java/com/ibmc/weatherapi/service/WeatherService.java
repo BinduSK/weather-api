@@ -18,6 +18,7 @@ public class WeatherService {
         weather.setCountry(country);
         OpenWeatherResponse openWeatherResponse = openWeatherRestClient.getWeather(city, state, country);
         weather.setCurrentTemperature(openWeatherResponse.getMain().getTemp());
+        weather.setFeelslike(openWeatherResponse.getMain().getFeelslike());
         return weather;
     }
 }
